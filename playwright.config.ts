@@ -4,8 +4,14 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   use: {
-    trace: "on-first-retry",
+    trace: "on",
+    baseURL: "https://api.github.com",
+    extraHTTPHeaders: {
+      Accept: "application/vnd.github.v3+json",
+      Authorization: `token ${process.env.API_TOKEN}`,
+    },
   },
+
   projects: [
     {
       name: "chromium",
